@@ -6,6 +6,8 @@
 
 # Pre-requisites
 
+> **WARNING:** XPM assumes full control of your HOSTS file. It will delete existing records. Proceed with caution.
+
 * .NET Framework 4.6.1
 * XAMPP
   * Apache **must** be installed as a service
@@ -15,13 +17,7 @@
 
 # Setup
 
-1. Install a DNS proxy service. The purpose of this is each project gets a `.local` domain assigned to it. For instance, if your project name is `myproject`, instead of using `http://localhost/myproject/` you can use `http://myproject.local` (which, by the way, is the best way to do things). For this, I recommend using [Acrylic DNS](http://mayakron.altervista.org/wikibase/show.php?id=AcrylicHome). Set your DNS proxy in such a way that all `.local` domains point to your local address (usually `127.0.0.1`). If you're going to use Acrylic DNS, Acrylic's hosts file should look like this:
-
-```
-127.0.0.1    *.local
-```
-
-2. [Download the installer](https://github.com/liamdemafelix/xpm/raw/master/setup.exe) and run it to install XPM.
+[Download the installer](https://github.com/liamdemafelix/xpm/raw/master/setup.exe) and run it to install XPM.
 
 # Usage
 
@@ -42,7 +38,7 @@ Select the project's configuration file and click **Delete**. It will also ask y
 XPM is licensed under the MIT Open Source License.
 
 ```
-Copyright 2017 Liam Demafelix
+Copyright 2017-2018 Liam Demafelix
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

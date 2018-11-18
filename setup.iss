@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "XPM"
-#define MyAppVersion "1.0"
+#define MyAppVersion "1.2"
 #define MyAppPublisher "Liam Demafelix"
 #define MyAppURL "https://github.com/liamdemafelix"
 #define MyAppExeName "XPM.exe"
@@ -21,7 +21,7 @@ AppSupportURL={#MyAppURL}
 AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppName}
 DisableProgramGroupPage=yes
-OutputDir=C:\Users\liamd\source\repos\XPM
+OutputDir=C:\Users\Liam\source\repos\xpm
 OutputBaseFilename=setup
 Compression=lzma
 SolidCompression=yes
@@ -33,11 +33,11 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\liamd\source\repos\XPM\XPM\bin\Debug\XPM.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\liamd\source\repos\XPM\XPM\bin\Debug\XPM.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\liamd\source\repos\XPM\XPM\bin\Debug\XPM.exe.config"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\liamd\source\repos\XPM\XPM\bin\Debug\XPM.pdb"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\liamd\source\repos\XPM\XPM\bin\Debug\XPM.xml"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.pdb"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.xml"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
