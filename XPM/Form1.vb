@@ -23,6 +23,9 @@ Public Class frmMain
     ' Set variable for folder to delete, if any
     Dim FolderDelete As String = ""
 
+    ' Initialize the WindowsHost Class
+    Dim WindowsHostSession As New WindowsHost()
+
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Determine XAMPP Root
         If My.Computer.FileSystem.FileExists(XPM_ROOT & "root.txt") Then
@@ -143,6 +146,10 @@ IncludeOptional conf/vhosts/*.conf"
 </VirtualHost>"
         My.Computer.FileSystem.WriteAllText(projectConfFile, vh, False)
 
+        ' Add to HOSTS File
+        tslStatus.Text = "Adding to HOSTS file..."
+        WindowsHostSession.AddHostMap(New HostMap(projectName & ".local", System.Net.IPAddress.Parse("127.0.0.1")))
+
         ' Do we run laravel new?
         If chkRunLaravelNew.Checked = True Then
             If chkLaravel.Checked = True Then
@@ -215,6 +222,10 @@ IncludeOptional conf/vhosts/*.conf"
                 bwDeleteFolder.RunWorkerAsync()
             End If
         End If
+
+        ' Remove from HOSTS File
+        Dim dom As String = lvProjects.SelectedItem().ToString().Replace(XAMPP_ROOT & "apache\conf\vhosts\", "").ToString().Replace(".local.conf", ".local")
+        WindowsHostSession.DeleteHostMapByDomain(dom)
 
         ' Restart Apache
         restartSrv = "Apache2.4"
