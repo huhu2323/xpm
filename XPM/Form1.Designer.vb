@@ -38,6 +38,7 @@ Partial Class frmMain
         Me.refreshList = New System.Windows.Forms.Timer(Me.components)
         Me.lvProjects = New System.Windows.Forms.ListBox()
         Me.lblCredit = New System.Windows.Forms.LinkLabel()
+        Me.bwDeleteFolder = New System.ComponentModel.BackgroundWorker()
         Me.grpNewProject.SuspendLayout()
         Me.ssGeneric.SuspendLayout()
         Me.SuspendLayout()
@@ -155,6 +156,9 @@ Partial Class frmMain
         Me.lblCredit.TabStop = True
         Me.lblCredit.Text = "https://github.com/liamdemafelix"
         '
+        'bwDeleteFolder
+        '
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -195,4 +199,5 @@ Partial Class frmMain
     Friend WithEvents refreshList As Timer
     Friend WithEvents lvProjects As ListBox
     Friend WithEvents lblCredit As LinkLabel
+    Friend WithEvents bwDeleteFolder As System.ComponentModel.BackgroundWorker
 End Class

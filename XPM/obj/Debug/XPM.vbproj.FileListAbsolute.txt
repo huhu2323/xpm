@@ -9,3 +9,15 @@ C:\Users\liamd\source\repos\XPM\XPM\obj\Debug\XPM.vbproj.CoreCompileInputs.cache
 C:\Users\liamd\source\repos\XPM\XPM\obj\Debug\XPM.exe
 C:\Users\liamd\source\repos\XPM\XPM\obj\Debug\XPM.xml
 C:\Users\liamd\source\repos\XPM\XPM\obj\Debug\XPM.pdb
+C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.exe.config
+C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.exe
+C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.pdb
+C:\Users\Liam\source\repos\xpm\XPM\bin\Debug\XPM.xml
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.vbprojAssemblyReference.cache
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.frmMain.resources
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.Resources.resources
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.vbproj.GenerateResource.cache
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.vbproj.CoreCompileInputs.cache
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.exe
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.xml
+C:\Users\Liam\source\repos\xpm\XPM\obj\Debug\XPM.pdb

@@ -1,4 +1,5 @@
-﻿Imports System.ServiceProcess
+﻿Imports System.ComponentModel
+Imports System.ServiceProcess
 Imports System.Threading
 
 Public Class frmMain
@@ -16,6 +17,11 @@ Public Class frmMain
     Dim projectName As String = ""
     Dim projectConfFile As String = ""
 
+    ' Create termination lock
+    Dim TerminationLock As Boolean = False
+
+    ' Set variable for folder to delete, if any
+    Dim FolderDelete As String = ""
 
     Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ' Determine XAMPP Root
@@ -52,6 +58,12 @@ IncludeOptional conf/vhosts/*.conf"
             My.Computer.FileSystem.WriteAllText(XAMPP_ROOT & "apache\conf\extra\httpd-vhosts.conf", vhdata, False)
         End If
 
+        ' Generate the logs folder
+        If My.Computer.FileSystem.DirectoryExists(XAMPP_ROOT & "logs") = False Then
+            ' Create
+            My.Computer.FileSystem.CreateDirectory(XAMPP_ROOT & "logs")
+        End If
+
         ' Start Timer
         refreshList.Start()
 
@@ -62,6 +74,8 @@ IncludeOptional conf/vhosts/*.conf"
     End Sub
 
     Private Sub bwServiceRestart_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwServiceRestart.DoWork
+        ' Toggle the Termination Lock
+        TerminationLock = True
         For Each s As ServiceController In ServiceController.GetServices()
             If s.ServiceName = restartSrv Then
                 tslStatus.Text = "Restarting service " & restartSrv & "..."
@@ -121,11 +135,11 @@ IncludeOptional conf/vhosts/*.conf"
         End If
         Dim vh As String = $"
 <VirtualHost *:80>
-	ServerAdmin root@localhost
+	ServerAdmin root@{projectName}.local
 	DocumentRoot ""{XAMPP_ROOT}htdocs\{projectName}{drAppend}""
 	ServerName {projectName}.local
-	ErrorLog ""logs/localhost-error.log""
-	CustomLog ""logs/localhost-access.log"" common
+	ErrorLog ""{XAMPP_ROOT}logs\localhost-error.log""
+	CustomLog ""{XAMPP_ROOT}logs\localhost-access.log"" common
 </VirtualHost>"
         My.Computer.FileSystem.WriteAllText(projectConfFile, vh, False)
 
@@ -165,6 +179,8 @@ IncludeOptional conf/vhosts/*.conf"
 
     Private Sub bwServiceRestart_RunWorkerCompleted(sender As Object, e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles bwServiceRestart.RunWorkerCompleted
         tslStatus.Text = "Ready"
+        ' Unlock termination
+        TerminationLock = False
     End Sub
 
     Private Sub bwRunLaravel_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles bwRunLaravel.DoWork
@@ -193,9 +209,10 @@ IncludeOptional conf/vhosts/*.conf"
             My.Computer.FileSystem.DeleteFile(lvProjects.SelectedItem)
         ElseIf result = DialogResult.Yes Then
             My.Computer.FileSystem.DeleteFile(lvProjects.SelectedItem)
-            Dim projdir As String = XAMPP_ROOT & "htdocs\" & lvProjects.SelectedItem().ToString().Replace(XAMPP_ROOT & "apache\conf\vhosts", "").ToString().Replace(".local.conf", "")
-            If My.Computer.FileSystem.DirectoryExists(projdir) Then
-                My.Computer.FileSystem.DeleteDirectory(projdir, FileIO.DeleteDirectoryOption.DeleteAllContents)
+            ' Dim projdir As String = XAMPP_ROOT & "htdocs\" & lvProjects.SelectedItem().ToString().Replace(XAMPP_ROOT & "apache\conf\vhosts", "").ToString().Replace(".local.conf", "")
+            FolderDelete = XAMPP_ROOT & "htdocs\" & lvProjects.SelectedItem().ToString().Replace(XAMPP_ROOT & "apache\conf\vhosts", "").ToString().Replace(".local.conf", "")
+            If My.Computer.FileSystem.DirectoryExists(FolderDelete) Then
+                bwDeleteFolder.RunWorkerAsync()
             End If
         End If
 
@@ -224,5 +241,21 @@ IncludeOptional conf/vhosts/*.conf"
 
     Private Sub lblCredit_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblCredit.LinkClicked
         Process.Start("https://github.com/liamdemafelix")
+    End Sub
+
+    Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        If TerminationLock Then
+            MessageBox.Show("Please wait for pending operations to finish before closing the application.", "Pending Operation", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub bwDeleteFolder_DoWork(sender As Object, e As DoWorkEventArgs) Handles bwDeleteFolder.DoWork
+        My.Computer.FileSystem.DeleteDirectory(FolderDelete, FileIO.DeleteDirectoryOption.DeleteAllContents)
+    End Sub
+
+    Private Sub bwDeleteFolder_RunWorkerCompleted(sender As Object, e As RunWorkerCompletedEventArgs) Handles bwDeleteFolder.RunWorkerCompleted
+        ' Reset the variable value
+        FolderDelete = ""
     End Sub
 End Class
