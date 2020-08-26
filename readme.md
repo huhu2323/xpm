@@ -17,7 +17,7 @@
 
 # Setup
 
-[Download the latest release](https://github.com/liamdemafelix/xpm/releases/download/1.2/setup.exe) and run it to install XPM.
+[Download the latest release](https://github.com/ldemafelix/xpm/releases/download/1.2/setup.exe) and run it to install XPM.
 
 # Usage
 
