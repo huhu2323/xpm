@@ -17,7 +17,7 @@
 
 # Setup
 
-[Download the latest release](https://github.com/ldemafelix/xpm/releases/download/1.2/setup.exe) and run it to install XPM.
+[Download the latest release](https://github.com/ldemafelix/xpm/releases/download/v1.3.0/setup.exe) and run it to install XPM.
 
 # Usage
 
@@ -28,6 +28,8 @@ The first time you open XPM, it'll modify your XAMPP configuration, specifically
 ## Creating a Project
 
 Type the name of your project in the text field. Make sure that your project name is **lowercase** and **alphanumeric**. If you will use Laravel, make sure **Composer** and the **Laravel cmd utility** is installed and configured. Check **Use Laravel Template** so that XPM will know the correct `DocumentRoot` to use. Optionally, you can check `Run 'laravel new'` so XPM can call the Laravel cmd utility to build your new project.
+
+Checking **Create DNS Hosts Entry** creates an entry in the Windows HOSTS file. This is useful if you have no DNS proxy. Upon creation, your project can be accessed at `http://<your-project>.local/`.
 
 ## Deleting a Project
 
