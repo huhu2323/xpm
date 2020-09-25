@@ -105,20 +105,25 @@ IncludeOptional conf/vhosts/*.conf"
 
         ' Validate
         projectName = txtProjectName.Text()
-        If System.Text.RegularExpressions.Regex.IsMatch(projectName, "^[a-z0-9]+$") = False Then
-            MessageBox.Show("Invalid project name. XMP only accepts alphanumeric characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-            btnCreate.Enabled = True
-            btnDelete.Enabled = True
-            txtProjectName.ReadOnly = False
-            chkLaravel.Enabled = True
-            If chkLaravel.Checked Then
-                chkRunLaravelNew.Enabled = True
-            End If
-            Exit Sub
+        Dim isValidName As Boolean = True
+
+        ' Check Project Name
+        If System.Text.RegularExpressions.Regex.IsMatch(projectName, "^[a-z0-9\-]+$") = False Then
+            MessageBox.Show("Invalid project name. XPM only accepts lowercase alphanumeric characters and dashes.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            isValidName = False
+        ElseIf projectName.StartsWith("-") Or projectName.EndsWith("-") Then
+            MessageBox.Show("Invalid project name. Ensure that your project name does not start or end with a dash.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            isValidName = False
         End If
 
+        ' Check Project Uniqueness
         projectConfFile = XAMPP_ROOT & "apache\conf\vhosts\" & projectName & ".local.conf"
         If My.Computer.FileSystem.FileExists(projectConfFile) Then
+            MessageBox.Show("A project of the same name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            isValidName = False
+        End If
+
+        If isValidName = False Then
             btnCreate.Enabled = True
             btnDelete.Enabled = True
             txtProjectName.ReadOnly = False
@@ -126,7 +131,6 @@ IncludeOptional conf/vhosts/*.conf"
             If chkLaravel.Checked Then
                 chkRunLaravelNew.Enabled = True
             End If
-            MessageBox.Show("A project of the same name already exists.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             Exit Sub
         End If
 
@@ -136,8 +140,7 @@ IncludeOptional conf/vhosts/*.conf"
         If chkLaravel.Checked Then
             drAppend = "\public"
         End If
-        Dim vh As String = $"
-<VirtualHost *:80>
+        Dim vh As String = $"<VirtualHost *:80>
 	ServerAdmin root@{projectName}.local
 	DocumentRoot ""{XAMPP_ROOT}htdocs\{projectName}{drAppend}""
 	ServerName {projectName}.local
@@ -147,10 +150,12 @@ IncludeOptional conf/vhosts/*.conf"
         My.Computer.FileSystem.WriteAllText(projectConfFile, vh, False)
 
         ' Add to HOSTS File
-        tslStatus.Text = "Adding to HOSTS file..."
-        WindowsHostSession.AddHostMap(New HostMap(projectName & ".local", System.Net.IPAddress.Parse("127.0.0.1")))
+        If chkCreateDNS.Checked Then
+            tslStatus.Text = "Adding to HOSTS file..."
+            WindowsHostSession.AddHostMap(New HostMap(projectName & ".local", System.Net.IPAddress.Parse("127.0.0.1")))
+        End If
 
-        ' Do we run laravel new?
+        ' Do we run `laravel new`?
         If chkRunLaravelNew.Checked = True Then
             If chkLaravel.Checked = True Then
                 tslStatus.Text = "Creating Laravel application..."
@@ -166,7 +171,7 @@ IncludeOptional conf/vhosts/*.conf"
         restartSrv = "Apache2.4"
         bwServiceRestart.RunWorkerAsync()
 
-
+        ' Add to the list
         lvProjects.Items.Clear()
         Dim AllowedExtension As String = "conf"
         For Each file As String In IO.Directory.GetFiles(XAMPP_ROOT & "apache\conf\vhosts", "*.*")
@@ -251,7 +256,7 @@ IncludeOptional conf/vhosts/*.conf"
     End Sub
 
     Private Sub lblCredit_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lblCredit.LinkClicked
-        Process.Start("https://github.com/liamdemafelix")
+        Process.Start("https://github.com/ldemafelix")
     End Sub
 
     Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing

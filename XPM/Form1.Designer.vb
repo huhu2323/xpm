@@ -39,12 +39,15 @@ Partial Class frmMain
         Me.lvProjects = New System.Windows.Forms.ListBox()
         Me.lblCredit = New System.Windows.Forms.LinkLabel()
         Me.bwDeleteFolder = New System.ComponentModel.BackgroundWorker()
+        Me.chkCreateDNS = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.grpNewProject.SuspendLayout()
         Me.ssGeneric.SuspendLayout()
         Me.SuspendLayout()
         '
         'grpNewProject
         '
+        Me.grpNewProject.Controls.Add(Me.chkCreateDNS)
         Me.grpNewProject.Controls.Add(Me.btnCreate)
         Me.grpNewProject.Controls.Add(Me.chkRunLaravelNew)
         Me.grpNewProject.Controls.Add(Me.chkLaravel)
@@ -52,14 +55,14 @@ Partial Class frmMain
         Me.grpNewProject.Controls.Add(Me.txtProjectName)
         Me.grpNewProject.Location = New System.Drawing.Point(12, 12)
         Me.grpNewProject.Name = "grpNewProject"
-        Me.grpNewProject.Size = New System.Drawing.Size(335, 155)
+        Me.grpNewProject.Size = New System.Drawing.Size(335, 193)
         Me.grpNewProject.TabIndex = 0
         Me.grpNewProject.TabStop = False
         Me.grpNewProject.Text = "New Project"
         '
         'btnCreate
         '
-        Me.btnCreate.Location = New System.Drawing.Point(130, 114)
+        Me.btnCreate.Location = New System.Drawing.Point(130, 143)
         Me.btnCreate.Name = "btnCreate"
         Me.btnCreate.Size = New System.Drawing.Size(75, 23)
         Me.btnCreate.TabIndex = 4
@@ -70,7 +73,7 @@ Partial Class frmMain
         '
         Me.chkRunLaravelNew.AutoSize = True
         Me.chkRunLaravelNew.Enabled = False
-        Me.chkRunLaravelNew.Location = New System.Drawing.Point(101, 85)
+        Me.chkRunLaravelNew.Location = New System.Drawing.Point(101, 106)
         Me.chkRunLaravelNew.Name = "chkRunLaravelNew"
         Me.chkRunLaravelNew.Size = New System.Drawing.Size(115, 19)
         Me.chkRunLaravelNew.TabIndex = 3
@@ -80,9 +83,9 @@ Partial Class frmMain
         'chkLaravel
         '
         Me.chkLaravel.AutoSize = True
-        Me.chkLaravel.Location = New System.Drawing.Point(101, 60)
+        Me.chkLaravel.Location = New System.Drawing.Point(101, 83)
         Me.chkLaravel.Name = "chkLaravel"
-        Me.chkLaravel.Size = New System.Drawing.Size(137, 19)
+        Me.chkLaravel.Size = New System.Drawing.Size(136, 19)
         Me.chkLaravel.TabIndex = 2
         Me.chkLaravel.Text = "Use &Laravel Template"
         Me.chkLaravel.UseVisualStyleBackColor = True
@@ -105,7 +108,7 @@ Partial Class frmMain
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(272, 368)
+        Me.btnDelete.Location = New System.Drawing.Point(272, 408)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnDelete.TabIndex = 2
@@ -115,7 +118,7 @@ Partial Class frmMain
         'ssGeneric
         '
         Me.ssGeneric.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tslStatus})
-        Me.ssGeneric.Location = New System.Drawing.Point(0, 402)
+        Me.ssGeneric.Location = New System.Drawing.Point(0, 458)
         Me.ssGeneric.Name = "ssGeneric"
         Me.ssGeneric.Size = New System.Drawing.Size(359, 22)
         Me.ssGeneric.TabIndex = 3
@@ -141,7 +144,7 @@ Partial Class frmMain
         '
         Me.lvProjects.FormattingEnabled = True
         Me.lvProjects.ItemHeight = 15
-        Me.lvProjects.Location = New System.Drawing.Point(12, 173)
+        Me.lvProjects.Location = New System.Drawing.Point(12, 211)
         Me.lvProjects.Name = "lvProjects"
         Me.lvProjects.Size = New System.Drawing.Size(335, 184)
         Me.lvProjects.TabIndex = 4
@@ -149,21 +152,41 @@ Partial Class frmMain
         'lblCredit
         '
         Me.lblCredit.AutoSize = True
-        Me.lblCredit.Location = New System.Drawing.Point(9, 372)
+        Me.lblCredit.Location = New System.Drawing.Point(9, 427)
         Me.lblCredit.Name = "lblCredit"
-        Me.lblCredit.Size = New System.Drawing.Size(188, 15)
+        Me.lblCredit.Size = New System.Drawing.Size(198, 15)
         Me.lblCredit.TabIndex = 6
         Me.lblCredit.TabStop = True
-        Me.lblCredit.Text = "https://github.com/liamdemafelix"
+        Me.lblCredit.Text = "https://github.com/ldemafelix/xpm"
         '
         'bwDeleteFolder
         '
+        '
+        'chkCreateDNS
+        '
+        Me.chkCreateDNS.AutoSize = True
+        Me.chkCreateDNS.Location = New System.Drawing.Point(101, 60)
+        Me.chkCreateDNS.Name = "chkCreateDNS"
+        Me.chkCreateDNS.Size = New System.Drawing.Size(149, 19)
+        Me.chkCreateDNS.TabIndex = 5
+        Me.chkCreateDNS.Text = "Create &DNS Hosts Entry"
+        Me.chkCreateDNS.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(9, 412)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(170, 15)
+        Me.Label1.TabIndex = 7
+        Me.Label1.Text = "XAMPP Project Manager v1.3.0"
         '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(359, 424)
+        Me.ClientSize = New System.Drawing.Size(359, 480)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.lblCredit)
         Me.Controls.Add(Me.lvProjects)
         Me.Controls.Add(Me.ssGeneric)
@@ -200,4 +223,6 @@ Partial Class frmMain
     Friend WithEvents lvProjects As ListBox
     Friend WithEvents lblCredit As LinkLabel
     Friend WithEvents bwDeleteFolder As System.ComponentModel.BackgroundWorker
+    Friend WithEvents chkCreateDNS As CheckBox
+    Friend WithEvents Label1 As Label
 End Class

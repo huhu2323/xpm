@@ -4,6 +4,7 @@
 Public Class WindowsHost
     Public ReadOnly Location As String
     Private FullMap As List(Of HostMap)
+
     Public Sub New()
         Location = Environment.SystemDirectory & "\drivers\etc\hosts"
         If Not System.IO.File.Exists(Location) Then
@@ -11,17 +12,21 @@ Public Class WindowsHost
         End If
         FullMap = LoadCurrentMap()
     End Sub
+
     Public Function Count() As Integer
         Return FullMap.Count
     End Function
+
     Public Function Item(ByVal index As Integer) As HostMap
         Return New HostMap(FullMap.Item(index))
     End Function
+
     Public Sub AddHostMap(ByVal NewMap As HostMap)
         FullMap = LoadCurrentMap()
         FullMap.Add(NewMap)
         SaveData()
     End Sub
+
     Public Sub DeleteHostMapByDomain(ByVal dom As String)
         FullMap = LoadCurrentMap()
         Dim Reall As Integer = 0
@@ -34,6 +39,7 @@ Public Class WindowsHost
         Next
         SaveData()
     End Sub
+
     Public Sub DeleteHostMapByIp(ByVal ip As System.Net.IPAddress)
         FullMap = LoadCurrentMap()
         Dim Reall As Integer = 0
@@ -45,9 +51,11 @@ Public Class WindowsHost
         Next
         SaveData()
     End Sub
+
     Public Sub UpdateData()
         FullMap = LoadCurrentMap()
     End Sub
+
     Private Function LoadCurrentMap() As List(Of HostMap)
         Dim FileStream As New System.IO.StreamReader(Location)
         Dim Lines() As String = FileStream.ReadToEnd.Split(New String() {Environment.NewLine}, StringSplitOptions.None)
@@ -67,8 +75,30 @@ Public Class WindowsHost
         Next
         Return Lst
     End Function
+
     Private Sub SaveData()
-        Dim Data As String = "# Windows Host Generate" & vbNewLine & "# Time: " & Now.ToString
+        Dim Data As String = "# Copyright (c) 1993-2009 Microsoft Corp.
+#
+# This is a sample HOSTS file used by Microsoft TCP/IP for Windows.
+#
+# This file contains the mappings of IP addresses to host names. Each
+# entry should be kept on an individual line. The IP address should
+# be placed in the first column followed by the corresponding host name.
+# The IP address and the host name should be separated by at least one
+# space.
+#
+# Additionally, comments (such as these) may be inserted on individual
+# lines or following the machine name denoted by a '#' symbol.
+#
+# For example:
+#
+#      102.54.94.97     rhino.acme.com          # source server
+#       38.25.63.10     x.acme.com              # x client host
+
+# localhost name resolution is handled within DNS itself.
+#	127.0.0.1       localhost
+#	::1             localhost"
+
         For Each Map As HostMap In FullMap
             Data = Data & vbNewLine & Map.ToString
         Next
@@ -77,17 +107,21 @@ Public Class WindowsHost
         w.Close()
     End Sub
 End Class
+
 Public Class HostMap
     Public domain As String
     Public Ip As System.Net.IPAddress
+
     Public Sub New(ByVal _dom As String, ByVal _ip As System.Net.IPAddress)
         domain = _dom
         Ip = _ip
     End Sub
+
     Public Sub New(ByRef map As HostMap)
         domain = map.domain
         Ip = map.Ip
     End Sub
+
     Public Overrides Function ToString() As String
         Return Ip.ToString & "       " & domain
     End Function

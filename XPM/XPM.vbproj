@@ -47,7 +47,7 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Iconsmind-Outline-Code-Window.ico</ApplicationIcon>
+    <ApplicationIcon>Papirus-Team-Papirus-Apps-Xampp.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
@@ -134,7 +134,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Iconsmind-Outline-Code-Window.ico" />
+    <Content Include="Papirus-Team-Papirus-Apps-Xampp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>

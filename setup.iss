@@ -2,9 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "XPM"
-#define MyAppVersion "1.2"
+#define MyAppVersion "1.3.0"
 #define MyAppPublisher "Liam Demafelix"
-#define MyAppURL "https://github.com/liamdemafelix"
+#define MyAppURL "https://github.com/ldemafelix/xpm"
 #define MyAppExeName "XPM.exe"
 
 [Setup]
