@@ -2,7 +2,7 @@
 
 **XPM** or **XAMPP Project Manager** is a simple utility to manage your XAMPP-related projects, with support for Laravel.
 
-![](https://github.com/liamdemafelix/xpm/raw/master/screenshot.jpg)
+![](https://github.com/ldemafelix/xpm/raw/master/screenshot.jpg)
 
 # Pre-requisites
 
