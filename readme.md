@@ -6,7 +6,7 @@
 
 # Pre-requisites
 
-> **WARNING:** XPM assumes full control of your HOSTS file. It will delete existing records. Proceed with caution.
+> **WARNING:** XPM assumes full control of your HOSTS file if the **Create DNS Hosts Entry** option is checked. It will delete existing records. Proceed with caution.
 
 * .NET Framework 4.6.1
 * XAMPP
